@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  consumer:
+    container_name: consumer
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+    command: scripts/web/startup.sh
+    restart: on-failure
+    env_file:
+      - ./conf/.env
+    volumes:
+      - .:/code
+    networks:
+      - sirius_network
+
+networks:
+  sirius_network:
+    external: True
